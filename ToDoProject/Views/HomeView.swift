@@ -12,6 +12,7 @@ struct HomeView: View {
     @State var showCreate: Bool = false
     @State var toEditItem: Item?
     @Environment(\.modelContext) private var modelContext
+    @State var viewModel = HomeViewModel()
     
     @Query(
         filter: #Predicate<Item> { $0.isCompleted == false},
@@ -27,12 +28,17 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack{
-            GeometryReader{ geometry in
-                List{
-                    Section(header:Text("Pending Items")){
+            
+            List{
+                Section(header:Text("Pending Items")){
+                    if pendingItems.isEmpty {
+                        HStack{
+                            Image(systemName: "list.dash")
+                            Text("No Items found")
+                        }
+                    }else {
                         ForEach(pendingItems, id:\.id){item in
                             ItemRowView(item: item)
-                                .frame(height: geometry.size.height * 0.1)
                                 .swipeActions{
                                     Button(role: .destructive){
                                         withAnimation{
@@ -52,10 +58,17 @@ struct HomeView: View {
                                 }
                         }
                     }
-                    Section(header: Text("Completed")){
+                    
+                }
+                Section(header: Text("Completed")){
+                    if doneItems.isEmpty{
+                        HStack{
+                            Image(systemName: "list.dash")
+                            Text("No Items found")
+                        }
+                    }else {
                         ForEach(doneItems, id:\.id){item in
                             ItemRowView(item: item)
-                                .frame(height: geometry.size.height * 0.1)
                                 .swipeActions{
                                     Button(role: .destructive){
                                         withAnimation{
@@ -75,30 +88,32 @@ struct HomeView: View {
                                 }
                         }
                     }
-                }
-                .listStyle(.plain)
-                .navigationTitle("To Do Lists")
-                .toolbar{
-                    ToolbarItem{
-                        Button(action: {
-                            showCreate.toggle()
-                        }, label: {
-                            Label("Add Item", systemImage: "plus")
-                        })
-                    }
-                }
-                .sheet(isPresented: $showCreate, content: {
-                    NavigationStack{
-                        CreateToDoView()
-                    }
-                    .presentationDetents([.large])
-                })
-                .sheet(item: $toEditItem){
-                    toEditItem = nil
-                } content: { item in
-                    EditView(item: item)
+                   
                 }
             }
+            .listStyle(.plain)
+            .navigationTitle("To Do Lists")
+            .toolbar{
+                ToolbarItem{
+                    Button(action: {
+                        showCreate.toggle()
+                    }, label: {
+                        Label("Add Item", systemImage: "plus")
+                    })
+                }
+            }
+            .sheet(isPresented: $showCreate, content: {
+                NavigationStack{
+                    CreateToDoView(viewModel: viewModel)
+                }
+                .presentationDetents([.large])
+            })
+            .sheet(item: $toEditItem){
+                toEditItem = nil
+            } content: { item in
+                EditView(item: item,viewModel: viewModel)
+            }
+            
         }
     }
     

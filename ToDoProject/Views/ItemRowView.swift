@@ -1,10 +1,18 @@
 import SwiftUI
+import Kingfisher
 
 struct ItemRowView: View {
     @State var item: Item
     
     var body: some View {
-        GeometryReader { geometry in
+        
+        VStack{
+            if let image = item.image {
+                KFImage(URL(string:image))
+                    .resizable()
+                    .frame(width: 350, height: 150)
+                    .cornerRadius(10)
+            }
             HStack {
                 Button(action: {
                     withAnimation {
@@ -27,13 +35,15 @@ struct ItemRowView: View {
                 .padding(.vertical, 8)
                 
                 Spacer()
+                Spacer()
                 
                 Text(item.dueDate.formatted())
                     .font(.subheadline)
-                    .frame(width: geometry.size.width * 0.3)
             }
-            .padding(.horizontal) // Example padding, adjust as needed
+            .padding(.horizontal)
         }
+        
+        
     }
 }
 
