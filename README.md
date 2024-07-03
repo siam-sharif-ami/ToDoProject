@@ -5,8 +5,7 @@ Your daily companion to track your to do items.
 To build an run the project: 
 1. Clone the GitHub repository to you machine by using git
 `https://github.com/siam-sharif-ami/ToDoProject.git`
-2. Download the googleservice-info.plist file from here
-[https://console.firebase.google.com/project/todoproject-79039/settings/general/ios:siamsharif.ToDoProject](url)
+2. Download the googleservice-info.plist file from [here](https://drive.google.com/file/d/1N8C95NxAvdexHnDOcuWkxrfyARc_RkWx/view?usp=sharing)
 
 ### Features
 1. To do Items page
