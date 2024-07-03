@@ -16,7 +16,7 @@ struct TestView: View {
     @State var mockDataPlaceHolder: Content = []
     
     var body: some View {
-        
+        Text("Done")
         KFImage(dummyVm.url)
         
        
