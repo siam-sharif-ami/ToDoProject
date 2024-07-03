@@ -18,4 +18,9 @@ class ToDoProjectRepositoryImpl: ToDoProjectRepository {
         let response = try await apiService.pushImageToFirebase(imageData: imageData)
         return response
     }
+    
+    func getMockData() async throws -> Content {
+        let response = try await apiService.getMockData()
+        return response
+    }
 }

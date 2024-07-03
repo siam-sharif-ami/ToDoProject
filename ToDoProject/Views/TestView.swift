@@ -13,11 +13,19 @@ struct TestView: View {
     @State var avatarImage: UIImage?
     @State var photoPickerItem: PhotosPickerItem?
     @State var dummyVm: HomeViewModel
-    
+    @State var mockDataPlaceHolder: Content = []
     
     var body: some View {
         
         KFImage(dummyVm.url)
+        
+       
+        List{
+            ForEach(mockDataPlaceHolder, id: \.id){ item in
+                let itemMade = Item(title: item.title, itemDescription: item.itemDescription ?? "This is mock data", dueDate: item.dueDate ?? Date.now, isCompleted: item.completed)
+                ItemRowView(item: itemMade)
+            }
+        }
         
         PhotosPicker(selection: $photoPickerItem) {
             if avatarImage == nil {
@@ -39,6 +47,15 @@ struct TestView: View {
                     }
                 }
                 photoPickerItem = nil
+            }
+        }
+        .onAppear(){
+            Task{
+                do{
+                    mockDataPlaceHolder = try await dummyVm.repository.getMockData()
+                }catch{
+                    print("failed to retrieve dummy data from api ")
+                }
             }
         }
         

@@ -9,4 +9,5 @@ import Foundation
 
 protocol ToDoProjectRepository{
     func pushImageToFirebase(imageData: Data) async throws -> URL
+    func getMockData() async throws -> Content
 }

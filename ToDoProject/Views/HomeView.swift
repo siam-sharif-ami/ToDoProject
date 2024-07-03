@@ -11,24 +11,24 @@ import SwiftData
 struct HomeView: View {
     @State var showCreate: Bool = false
     @State var toEditItem: Item?
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) var modelContext
     @State var viewModel = HomeViewModel()
+    @State var mockDataPlaceHolder: Content = []
     
     @Query(
         filter: #Predicate<Item> { $0.isCompleted == false},
         sort: \.dueDate ,
-        order: .reverse
+        order: .forward
     ) private var pendingItems: [Item]
     
     @Query(
         filter: #Predicate<Item> {$0.isCompleted == true },
         sort: \.dueDate,
-        order: .reverse
+        order: .forward
     ) private var doneItems: [Item]
     
     var body: some View {
         NavigationStack{
-            
             List{
                 Section(header:Text("Pending Items")){
                     if pendingItems.isEmpty {
@@ -88,7 +88,7 @@ struct HomeView: View {
                                 }
                         }
                     }
-                   
+                    
                 }
             }
             .listStyle(.plain)
@@ -115,9 +115,37 @@ struct HomeView: View {
             }
             
         }
+        .onChange(of: pendingItems){ _ in
+            checkAndLoadMockData()
+        }
+        .onChange(of: doneItems){ _ in
+            checkAndLoadMockData()
+        }
+        .onAppear(){
+            checkAndLoadMockData()
+        }
     }
     
 }
+private extension HomeView {
+    func checkAndLoadMockData(){
+        if pendingItems.isEmpty && doneItems.isEmpty {
+            Task{
+                do{
+                    mockDataPlaceHolder = try await viewModel.repository.getMockData()
+                    for data in mockDataPlaceHolder {
+                        let item = Item(title: data.title, itemDescription: data.itemDescription ?? "This is a mock data", dueDate: data.dueDate ?? Date.now, isCompleted: data.completed)
+                        modelContext.insert(item)
+                    }
+                    mockDataPlaceHolder = []
+                }catch {
+                    print("Error fetching mock data from api ")
+                }
+            }
+        }
+    }
+}
+
 
 #Preview {
     HomeView()

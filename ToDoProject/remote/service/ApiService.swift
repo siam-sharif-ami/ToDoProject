@@ -10,4 +10,5 @@ import PhotosUI
 
 protocol ApiService {
     func pushImageToFirebase(imageData: Data) async throws -> URL
+    func getMockData() async throws -> Content
 }
