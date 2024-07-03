@@ -17,22 +17,22 @@ To build an run the project:
 
 ### Screenshots 
 **To do items page**\
-<img src = "images/Home.png" width = 50%>
+<img src = "images/Home.png" width = 25%>
 
 **Add new item**\
-<img src = "images/Create.png" width = 50%>
+<img src = "images/Create.png" width = 25%>
 
 **Edit an existing item**\
-<img src = "images/Edit_item.png" width = 50%>
+<img src = "images/Edit_item.png" width = 25%>
 
 **Delete an item**\
-<img src = "images/delete.png" width = 50%>
+<img src = "images/delete.png" width = 25%>
 
 **Mark as done**\
-<img src= "images/completed.png" width = 50%>
+<img src= "images/completed.png" width = 25%>
 
 ### Sample Video Demonstrating App Functionality
-<img src= "images/AppDemo.gif" width = 50%>
+<img src= "images/AppDemo.gif" width = 25%>
 
 **Assumptions and Decisions made during development:**
 1. Use of MVVM with Repository pattern
