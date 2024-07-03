@@ -16,23 +16,23 @@ To build an run the project:
 
 
 ### Screenshots 
-**To do items page**
-![image](https://github.com/siam-sharif-ami/ToDoProject/assets/168058996/3c3bd190-7f50-45d1-9a9d-0f9db56c11e7)
+**To do items page**\
+<img src = "images/Home.png" width = 50%>
 
-**Add new item**
-![image](https://github.com/siam-sharif-ami/ToDoProject/assets/168058996/a47c8183-6e1c-426e-b709-01d32ca02741)
-![image](https://github.com/siam-sharif-ami/ToDoProject/assets/168058996/15155f24-2418-48d9-abca-b69419324e0e)
+**Add new item**\
+<img src = "images/Create.png" width = 50%>
 
-**Edit an existing item**
-![image](https://github.com/siam-sharif-ami/ToDoProject/assets/168058996/59401c8b-b203-4ca7-ae87-5bef99858f77)
-![image](https://github.com/siam-sharif-ami/ToDoProject/assets/168058996/ac9a1961-27a4-426b-9793-753f4e1e48ca)
+**Edit an existing item**\
+<img src = "images/Edit_item.png" width = 50%>
 
-**Delete an item**
-![image](https://github.com/siam-sharif-ami/ToDoProject/assets/168058996/e84158be-8430-4d73-a584-da7e21897e49)
+**Delete an item**\
+<img src = "images/delete.png" width = 50%>
 
+**Mark as done**\
+<img src= "images/completed.png" width = 50%>
 
 ### Sample Video Demonstrating App Functionality
-https://github.com/siam-sharif-ami/ToDoProject/assets/168058996/89924947-2120-45c9-9ce0-270a4f7b726a
+<img src= "images/AppDemo.gif" width = 50%>
 
 **Assumptions and Decisions made during development:**
 1. Use of MVVM with Repository pattern
